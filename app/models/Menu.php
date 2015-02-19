@@ -2,64 +2,33 @@
 
 class Menu extends Eloquent {
 
-	
-	public function setFecha($fecha)
+	public function plato()
 	{
-		$this->fecha = $fecha;
+		return $this->belongsToMany('Plato','menu_x_platos');
 	}
 
-	public function getFecha()
+	public function entrada()
 	{
-		return $this->fecha;
+		return $this->belongsToMany('Entrada','menu_x_platos');
 	}
 
-	public function setTipo($tipo)
+	public function refresco()
 	{
-		$this->tipo = $tipo;
+		return $this->belongsToMany('Refresco','menu_x_platos');
 	}
 
-	public function getTipo()
+	public function postre()
 	{
-		return $this->tipo;
+		return $this->belongsToMany('Postre','menu_x_platos');
 	}
 
-	public function setEntrada($entrada)
+	public function semana()
 	{
-		$this->entrada = $entrada;
+		return $this->belongsTo('MenuSemanal','semanal_id');
 	}
 
-	public function getEntrada()
+	public function reservas()
 	{
-		return $this->entrada;
-	}
-
-	public function setSegundo($segundo)
-	{
-		$this->segundo = $segundo;
-	}
-
-	public function getSegundo()
-	{
-		return $this->segundo;
-	}
-
-	public function setRefresco($refresco)
-	{
-		$this->refresco = $refresco;
-	}
-
-	public function getRefresco()
-	{
-		return $this->refresco;
-	}
-
-	public function setPostre($postre)
-	{
-		$this->postre = $postre;
-	}
-
-	public function getPostre()
-	{
-		return $this->postre;
+		return $this->hasMany('Reserva');
 	}
 }

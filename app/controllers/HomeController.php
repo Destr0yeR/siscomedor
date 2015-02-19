@@ -20,4 +20,31 @@ class HomeController extends BaseController {
 		return View::make('hello');
 	}
 
+	public function showLogin()
+	{
+		return View::make('login.login');
+	}
+	public function login()
+	{
+		$credentials = array(
+					'dni'=>Input::get('dni'),
+					'password'=>Input::get('password')
+					);
+
+		if (Auth::attempt($credentials))
+		{
+		    return Redirect::intended('/menu');
+		}
+		else
+		{
+			return Redirect::to('/')->with('warning','Wrong User/Password combination')->withInput();
+		}
+	}
+
+	public function logout()
+	{
+			Auth::logout();
+			return Redirect::to('/')->with('warning','You just Logged Out');		
+	}
+
 }
